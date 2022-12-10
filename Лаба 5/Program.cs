@@ -23,5 +23,29 @@
                     break;
             }
         }
+        static void L1()
+        {
+            Console.WriteLine("Введите вещественное число");
+            string f = Console.ReadLine();
+
+            int b;
+            while (true)
+            {
+
+                Console.WriteLine("Введите число" +
+                    "\nq - если хотите завершить работу программы");
+                string s = Console.ReadLine();
+
+
+                if (s == "q") break;
+
+                if (int.TryParse(s, out b))
+                    Console.WriteLine(s);
+                else
+                {
+                    if (s == f) break;
+                }
+            }
+        }
     }
 }
