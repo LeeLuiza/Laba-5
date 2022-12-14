@@ -2,39 +2,100 @@
 {
     static void Main()
     {
-        Console.WriteLine("Введите номер задания");
+        Console.WriteLine("Введите номер задания" + "\nДля выхода нажмите - '0'");
         {
-            Console.WriteLine("Для выхода нажмите - '0'");
-            string point = Console.ReadLine();
-            switch (point)
+            string number = Console.ReadLine();
+            while (true)
             {
-
+                if (number == "1" || number == "2" || number == "3" || number == "4") break;
+                else
+                {
+                    Console.WriteLine("Введите номер задания от 1-4");
+                    number = Console.ReadLine();
+                }
+            }
+            switch (number)
+            {
                 case "1":
-                    L1();
+                    IntFunction();
                     break;
                 case "2":
-                    L2();
+                    ParseNumber();
                     break;
                 case "3":
-                    L3();
+                    IntFunction2();
                     break;
                 case "4":
-                    L4();
+                    ChangingArray();
                     break;
             }
         }
-        static void L3()
+
+       
+        static void IntFunction()
+        {
+            Console.WriteLine("Введите вещественное число");
+            string floatnum = Console.ReadLine();
+
+            int b;
+            while (true)
+            {
+
+                Console.WriteLine("Введите число" +
+                    "\nq - если хотите завершить работу программы");
+                string s = Console.ReadLine();
+
+                if (s == "q") break;
+
+                if (int.TryParse(s, out b))
+                    Console.WriteLine(s);
+                else
+                {
+                    if (s == floatnum) break;
+                }
+            }
+        }
+
+
+        static void ParseNumber()
+        {
+            string intnumber = Console.ReadLine();
+
+            char[] charnum = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-' };
+            int[] intnum = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+            int summ = 0;
+            for (int t = 0; t < intnumber.Length; t++)
+            {
+                int k = 0;
+                for (int i = 0; i < charnum.Length; i++)
+                    if (intnumber[t] == charnum[i]) k = k + 1;
+                if (k == 0)
+                {
+                    Console.WriteLine("Число введено не корректно");
+                    break;
+                }
+
+                for (int h = 0; h < intnum.Length; h++)  //считаем сумму
+                    if (intnumber[t] == charnum[h]) summ += intnum[h];
+            }
+
+            Console.Write("Сумма ");
+            Console.Write(summ);
+        }
+
+
+        static void IntFunction2()
         {
             string s = "4.5";
             int a = checkint(s);
-            float f = checkfloat(s);
-            float l = checkfloat(s);
+            float float1 = checkfloat(s);
+            float float2 = checkfloat(s);
             char c = checkchar(s);
 
-            if (f == l)
+            if (float1 == float2)
                 Console.WriteLine("f и l равны");
 
-            var sum = a + f; // тип float
+            var sum = a + float1; // тип float
 
             char a1 = (char)a;
             Console.WriteLine(a1);
@@ -42,6 +103,7 @@
             if (a1 == c)
                 Console.WriteLine("a и c равны");
         }
+
         static float checkfloat(string s)
         {
             Console.WriteLine("Введите вещественное число");
@@ -58,6 +120,7 @@
             }
             return f;
         }
+
         static char checkchar(string s)
         {
             Console.WriteLine("Введите символ");
@@ -74,6 +137,7 @@
             }
             return f;
         }
+
         static int checkint(string s)
         {
             Console.WriteLine("Введите целое число");
@@ -90,100 +154,62 @@
             }
             return f;
         }
-        static void L1()
+
+
+        static void ChangingArray()
         {
-            Console.WriteLine("Введите вещественное число");
-            string f = Console.ReadLine();
-
-            int b;
-            while (true)
-            {
-
-                Console.WriteLine("Введите число" +
-                    "\nq - если хотите завершить работу программы");
-                string s = Console.ReadLine();
-
-
-                if (s == "q") break;
-
-                if (int.TryParse(s, out b))
-                    Console.WriteLine(s);
-                else
-                {
-                    if (s == f) break;
-                }
-            }
-        }
-        static void L2()
-        {
-            string x = Console.ReadLine();
-
-            char[] a = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-' };
-            int[] c = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
-            int summ = 0;
-            for (int t = 0; t < x.Length; t++)
-            {
-                int k = 0;
-                for (int i = 0; i < a.Length; i++)
-                    if (x[t] == a[i]) k = k + 1;
-                if (k == 0)
-                {
-                    Console.WriteLine("Число введено не корректно");
-                    break;
-                }
-
-                for (int h = 0; h < c.Length; h++)  //считаем сумму
-                    if (x[t] == a[h]) summ += c[h];
-            }
-
-            Console.Write("Сумма ");
-            Console.Write(summ);
-        }
-        static void L4()
-        {
-        v:
-            Console.WriteLine("Введите длину массива");
-            int x = int.Parse(Console.ReadLine());
-
-            var array = new string[x];
-
-            for (int i = 0; i < x; i++)
-            {
-                Console.WriteLine(i + 1 + " элемент массива");
-                array[i] = (Console.ReadLine());
-            }
-
-            var a = new object[x];
+            string[] array;
+            double[] arrayresult;
             string k;
             int n;
             double f;
-            for (int i = 0; i < x; i++) //заполнение массива a
+
+            while (true)
             {
-                k = array[i];
-                if (check(k) == 0)
+                Console.WriteLine("Введите длину массива");
+                int x = int.Parse(Console.ReadLine());
+
+                array = new string[x];
+
+                for (int i = 0; i < x; i++) 
                 {
-                    Console.WriteLine("Массив введен не верно. Вводите только вещественные числа и целые");
-                    goto v;
+                    Console.WriteLine(i + 1 + " элемент массива");
+                    array[i] = (Console.ReadLine());
                 }
-                else if (check(k) == 1)
+
+                arrayresult = new double[x];
+                
+                for (int i = 0; i < x; i++) //заполнение массива arrayresult
                 {
-                    n = int.Parse(array[i]);
-                    if (n > 0) a[i] = Factorial(n);
-                    else a[i] = n;
+                    k = array[i];
+                    if (check(k) == 0)
+                    {
+                        Console.WriteLine("Массив введен не верно. Вводите только вещественные числа и целые");
+                        break;
+                    }
+                    else if (check(k) == 1)
+                    {
+                        n = int.Parse(array[i]);
+                        if (n > 0) arrayresult[i] = Factorial(n);
+                        else arrayresult[i] = n;
+                    }
+                    else
+                    {
+                        f = double.Parse(array[i]);
+                        f = (f % (int)f) * 100;
+                        arrayresult[i] = Math.Round(f);
+                    }
                 }
-                else
-                {
-                    f = double.Parse(array[i]);
-                    f = (f % (int)f) * 100;
-                    a[i] = Math.Round(f);
-                }
+                break;
             }
-            foreach (var e in array)
+            foreach (var e in array) //вывод
                 Console.Write(e + " ");
             Console.WriteLine();
-            foreach (object e in a)
+            foreach (object e in arrayresult)
                 Console.Write(e + " ");
         }
+
+
         static int check(string s)
         {
             double f;
